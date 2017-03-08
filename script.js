@@ -37,6 +37,8 @@ var sixth_top = 85.4;
 
 var pane_parent_context = document.getElementById("geisel_pane_parent");
 
+var img_idx = 0;
+
 for( i = 0; i < dims.length; i++ ) {
 	var new_top = init_top + delta_top*i;
 
@@ -52,10 +54,12 @@ for( i = 0; i < dims.length; i++ ) {
 		imagenode.style.top = new_top.toString() + "%";
 		imagenode.style.left = new_left.toString() + "%";
 		imagenode.style.width = width.toString() + "%";
-		imagenode.setAttribute("src", "resources/instagram/0.jpg");
+		imagenode.setAttribute("src", "resources/instagram/" + img_idx.toString() + ".jpg");
 
 		console.log("Creating node - new_top = " + new_top.toString() + "%, left = " + new_left.toString() + "%");
 
 		pane_parent_context.appendChild(imagenode);
+
+		img_idx++;
 	}
 }
