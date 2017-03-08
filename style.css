@@ -1,0 +1,35 @@
+body {
+	background: linear-gradient(1deg, #003646 25%, rgb(255, 199, 139) 60%, #5cd2ff 100%);
+	width: 100%;
+	height: 100%;
+	margin: 0;
+
+}
+
+.geisel_parent {
+	position: relative;
+	top: 0;
+	left: 0;
+}
+
+.geisel_frame {
+	position: relative;
+	width: 100%;
+	height: auto;
+}
+
+.geisel_pane {
+	position: absolute;
+	top: 15%; /*10%*/
+    left: 27%; /*4.5%*/
+    width: 4.6%;
+    height: auto;
+}
+
+.geisel_windows {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: auto;
+}
