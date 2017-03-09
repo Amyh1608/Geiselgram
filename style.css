@@ -27,6 +27,8 @@ body {
 }
 
 .geisel_windows {
+	opacity: 0.5;
+	filter: alpha(opacity=50);
 	position: absolute;
 	top: 0;
 	left: 0;
