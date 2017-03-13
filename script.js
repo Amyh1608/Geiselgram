@@ -75,7 +75,12 @@ for( i = 0; i < dims.length; i++ ) {
 	}
 }
 
-navigator.webkitGetUserMedia({audio: true, video: false}, function(stream) {
+/******************************************************************************************
+	getUserMedia
+	Gets permission from the user to use microphone and measures audio levels
+******************************************************************************************/
+var getUserMedia = (navigator.webkitGetUserMedia || navigator.getUserMedia);
+getUserMedia({audio: true, video: false}, function(stream) {
 	var audioContext = new (window.AudioContext || window.webkitAudioContext)(); //or webkitAudioContext
 	var analyser = audioContext.createAnalyser();
 	var microphone = audioContext.createMediaStreamSource(stream);
@@ -131,3 +136,8 @@ navigator.webkitGetUserMedia({audio: true, video: false}, function(stream) {
 }, function(err) {
 	console.log('error', err);
 });
+
+
+function textCloud(speed) {
+
+}
