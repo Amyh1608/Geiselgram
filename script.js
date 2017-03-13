@@ -79,8 +79,7 @@ for( i = 0; i < dims.length; i++ ) {
 	getUserMedia
 	Gets permission from the user to use microphone and measures audio levels
 ******************************************************************************************/
-var getUserMedia = (navigator.webkitGetUserMedia || navigator.getUserMedia);
-getUserMedia({audio: true, video: false}, function(stream) {
+navigator.getUserMedia({audio: true, video: false}, function(stream) {
 	var audioContext = new (window.AudioContext || window.webkitAudioContext)(); //or webkitAudioContext
 	var analyser = audioContext.createAnalyser();
 	var microphone = audioContext.createMediaStreamSource(stream);
@@ -130,8 +129,6 @@ getUserMedia({audio: true, video: false}, function(stream) {
 				imagenodes[i][j].setAttribute("hidden", true);
 			}
 		}
-
-		console.log(rowsshown);
 	}
 }, function(err) {
 	console.log('error', err);
