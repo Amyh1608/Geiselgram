@@ -1,3 +1,7 @@
+/******************************************************************************************
+	random_img_ind()
+	Picks a random start point in the image directory and fills windows counting upwards.
+******************************************************************************************/
 var num_images = 560;
 var img_idx = Math.floor(Math.random() * num_images);
 
@@ -8,7 +12,6 @@ function random_img_idx() {
 
 	return img_idx++;
 }
-
 
 var init_top = 15;
 var init_left = 27;
@@ -41,7 +44,6 @@ var dims = [
 		width_end: 7
 	}   
 ];
-
 var width = 4.6;
 var sixth_top = 85.4;
 
@@ -77,7 +79,8 @@ for( i = 0; i < dims.length; i++ ) {
 
 /******************************************************************************************
 	getUserMedia
-	Gets permission from the user to use microphone and measures audio levels
+	Gets permission from the user to use microphone and measures audio levels to use as an 
+	input for the program
 ******************************************************************************************/
 navigator.getUserMedia({audio: true, video: false}, function(stream) {
 	var audioContext = new (window.AudioContext || window.webkitAudioContext)(); //or webkitAudioContext
@@ -112,14 +115,20 @@ navigator.getUserMedia({audio: true, video: false}, function(stream) {
 
 		var rowsshown = Math.floor(((values / length)/90)*dims.length);
 
+
 		if (rowsshown > dims.length) {
 			rowsshown = dims.length;
 		}
+		
+		textCloud(rowsshown);
 		//for showing images based on sound intensity
 		for(i = 0; i < rowsshown; i++) {
 			for(j = 0; j < imagenodes[i].length; j++) {
-				imagenodes[i][j].removeAttribute("hidden");
-				imagenodes[i][j].setAttribute("src", "resources/instagram/" + random_img_idx().toString() + ".jpg");
+				if(imagenodes[i][j].hasAttribute("hidden"))
+				{
+					imagenodes[i][j].removeAttribute("hidden");
+					imagenodes[i][j].setAttribute("src", "resources/instagram/" + random_img_idx().toString() + ".jpg");
+				}
 			}
 		}
 
@@ -134,7 +143,40 @@ navigator.getUserMedia({audio: true, video: false}, function(stream) {
 	console.log('error', err);
 });
 
+/******************************************************************************************
+	textCloud
+	
+******************************************************************************************/
+var context = document.getElementById("textCloud");
+var counter = 0;
 
 function textCloud(speed) {
+	var animContent = "the quick brown fox jumps over the lazy dog"
+	counter++;
+	if(counter > 50 - 10*speed)
+	{
+		counter = 0;
+		shootText(animContent, speed);
+	}
+}
 
+function shootText(animContent, animSpeed) {
+
+	var stringnode = document.createElement("DIV");
+	var stringcontent = document.createTextNode(animContent);
+	var randval = Math.random();
+
+	stringnode.style["position"] = "absolute";
+	stringnode.style["animation-name"] = "sidescroll";
+	stringnode.style["animation-duration"] = (6 - animSpeed).toString() + "s";
+	stringnode.style["top"] = (randval * 95).toString() + "vh";
+	stringnode.style["color"] = "rgba(" + "255" + "," + Math.floor(randval*250).toString()  + "," + Math.floor(randval*150).toString() + "," + "100)"
+	stringnode.style["font-size"] = "300%";
+	
+	stringnode.appendChild(stringcontent);
+	context.appendChild(stringnode);
+
+	setTimeout(function() {
+		context.removeChild(stringnode);
+	}, (6 - animSpeed)*1000 - 50);
 }
