@@ -113,7 +113,7 @@ navigator.getUserMedia({audio: true, video: false}, function(stream) {
 			values += array[i];
 		}
 
-		var rowsshown = Math.floor(((values / length)/90)*dims.length);
+		var rowsshown = Math.floor(((values / length)/80)*dims.length); //sensitivity of the mic
 
 
 		if (rowsshown > dims.length) {
@@ -149,14 +149,36 @@ navigator.getUserMedia({audio: true, video: false}, function(stream) {
 ******************************************************************************************/
 var context = document.getElementById("textCloud");
 var counter = 0;
+var animContent = [
+	"#GeiselLibrary has earned a place among the top 50 most amazing college libraries in the country!",
+	"#GeiselLibrary makes an appearance in the brand new #BrutalistColoringBook featuring iconic Brutalist buildings!",
+	"The de-stressing activities at #GeiselLibrary continue today w/games and activities from 3-5pm in the East Commons, Study Rm 2072! ",
+	'Image Preview - "Geisel Library" FULL STORY BY @zfastech360 #geisellibrary #geisel #universityofsandiego',
+	"Fantastic #LEGO #MOC by #TomAlphin of the #GeiselLibrary! Love seeing our custom printed pieces on amazing LEGO creations!",
+	"Lines on lines @ucsdlibrary. #GeiselLibrary #DesignInspiration #ConcreteDesign",
+	"So after an hour the 5 students stuck between 2nd & 4th floor #GeiselLibrary ARE FREE AT LAST FREE AT LAST @ucsdlibrary @UCSD #UCSD",
+	"Happy Birthday to long time La Jolla resident Dr. Seuss! @UCSanDiego #ReadAcrossAmerica #GeiselLibrary",
+	"We're getting our party on w/@ucsdBECS in front of #GeiselLibrary come grab a cupcake until they last! #HappyBirthdayDrSeuss #UCSanDiego",
+	"Special Hours: Tmrw #GeiselLibrary will be open 10am-6pm. On 2/20 Biomed will be closed & #GeiselLibrary will be open 10am-midnight.",
+	"Congratulations to our friends at UCSD #GeiselLibrary for making the @Curbed list!",
+	"The famous #UCSD #library. Some ppl say this beautiful building shows up in the movie #Inception (2010) #LaJolla #SanDiego #GeiselLibrary",
+	"Browse all of the new additions to the #popsci collection at #GeiselLibrary located on the 2nd floor in Geisel West",
+	"Now my 2nd favorite appearance of #GeiselLibrary in a book, after Vernor Vinge, _Rainbows End_. @ucsdlibrary @UCSanDiego @imagineUCSD",
+	"Monday // #Architecture : UCSD research #Library, La Jolla, 1970, #WilliamPereira, renamed #GeiselLibrary after benefactor Theodor Geisel",
+	"Check out this article from @AtlasObscura capturing the intricate architectural beauty of #GeiselLibrary",
+	"Don't miss Short Tales from the Mothership event tonight 7:30-8:30 at the #GeiselLibrary hosted by @ucsdlibrary",
+	"#FacultyFile Feature: #GeiselLibrary to undergo exciting transformation in the coming years.",
+	"Please Note: #GeiselLibrary will close early at 8pm from Monday, Dec. 12 thru Thursday, Dec. 15 due to Intersession",
+	"Reminder: #GeiselLibrary will open two hours later than usual tomorrow (12/11) at noon due to Intersession.",
+];
 
 function textCloud(speed) {
-	var animContent = "the quick brown fox jumps over the lazy dog"
+	var r = Math.floor(Math.random()*20);
 	counter++;
-	if(counter > 50 - 10*speed)
+	if(counter > 50 - 15*speed) //limits number of tweets on screen
 	{
 		counter = 0;
-		shootText(animContent, speed);
+		shootText(animContent[r], speed);
 	}
 }
 
@@ -165,18 +187,19 @@ function shootText(animContent, animSpeed) {
 	var stringnode = document.createElement("DIV");
 	var stringcontent = document.createTextNode(animContent);
 	var randval = Math.random();
+	var textspd = (15 - animSpeed); //speed of text based on sound
 
 	stringnode.style["position"] = "absolute";
 	stringnode.style["animation-name"] = "sidescroll";
-	stringnode.style["animation-duration"] = (6 - animSpeed).toString() + "s";
+	stringnode.style["animation-duration"] = textspd.toString() + "s";
 	stringnode.style["top"] = (randval * 95).toString() + "vh";
 	stringnode.style["color"] = "rgba(" + "255" + "," + Math.floor(randval*250).toString()  + "," + Math.floor(randval*150).toString() + "," + "100)"
-	stringnode.style["font-size"] = "300%";
+	stringnode.style["font-size"] = "200%";
 	
 	stringnode.appendChild(stringcontent);
 	context.appendChild(stringnode);
 
 	setTimeout(function() {
 		context.removeChild(stringnode);
-	}, (6 - animSpeed)*1000 - 50);
+	}, 	textspd*1000 - 50);
 }

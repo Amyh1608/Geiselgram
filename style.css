@@ -1,5 +1,6 @@
 body {
 	background: linear-gradient(1deg, #023e67 25%, #98dff5 70%,  #eef8fb 100%);
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	width: 100%;
 	height: 100%;
 	margin: 0;
@@ -9,11 +10,11 @@ body {
 
 @keyframes sidescroll {
 	from {
-		transform: translateX(-100%);
+		transform: translateX(100vw);
 	}
 
 	to {
-		transform: translateX(100vw);
+		transform: translateX(-100%);
 	}
 }
 
