@@ -80,7 +80,8 @@ for( i = 0; i < dims.length; i++ ) {
 /******************************************************************************************
 	getUserMedia
 	Gets permission from the user to use microphone and measures audio levels to use as an 
-	input for the program
+	input for the program. 
+	-Modified with reference to Microphone Volume.
 ******************************************************************************************/
 navigator.getUserMedia({audio: true, video: false}, function(stream) {
 	var audioContext = new (window.AudioContext || window.webkitAudioContext)(); //or webkitAudioContext
@@ -145,7 +146,9 @@ navigator.getUserMedia({audio: true, video: false}, function(stream) {
 
 /******************************************************************************************
 	textCloud
-	
+	The textcloud will display more strings in the background based on how loud the feedback
+	the mic is picking up. The text is displayed in a gradient from Red -> Yellow.
+	-Modified with reference to Sidescrolling Text.
 ******************************************************************************************/
 var context = document.getElementById("textCloud");
 var counter = 0;
@@ -187,7 +190,7 @@ function shootText(animContent, animSpeed) {
 	var stringnode = document.createElement("DIV");
 	var stringcontent = document.createTextNode(animContent);
 	var randval = Math.random();
-	var textspd = (15 - animSpeed); //speed of text based on sound
+	var textspd = (24 - animSpeed*2); //speed of text based on sound
 
 	stringnode.style["position"] = "absolute";
 	stringnode.style["animation-name"] = "sidescroll";
